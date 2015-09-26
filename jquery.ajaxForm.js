@@ -13,8 +13,6 @@
             $form = $form.closest('form');
         }
 
-        event += namespace;
-
         return {
             event: event,
             namespace: namespace,
@@ -34,7 +32,7 @@
     $.fn.ajaxForm = function (options) {
         return this.each(function () {
             var form = getFormData(this);
-            $(this).off(form.namespace).on(form.event, function (e) {
+            $(this).off(form.namespace).on(form.event + form.namespace, function (e) {
                 e.preventDefault();
                 var settings = $.extend(form.getOptions(), options);
                 $.ajax(settings);
