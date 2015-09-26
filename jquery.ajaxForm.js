@@ -19,6 +19,7 @@
             getOptions: function () {
                 var enctype = $form.prop('enctype') || 'application/x-www-form-urlencoded',
                     charset = $form.prop('accept-charset') || 'UTF-8';
+                
                 return {
                     contentType: enctype + '; charset=' + charset,
                     method: $form.prop('method') || 'GET',
@@ -34,8 +35,7 @@
             var form = getFormData(this);
             $(this).off(form.namespace).on(form.event + form.namespace, function (e) {
                 e.preventDefault();
-                var settings = $.extend(form.getOptions(), options);
-                $.ajax(settings);
+                $.ajax($.extend(form.getOptions(), options));
             });
         });
     };
